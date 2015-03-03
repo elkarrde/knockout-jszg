@@ -1,2 +1,2 @@
-# knockout-jszg
+# Knockout-jsZg
 KnockoutJS primer for JsZg meetup
