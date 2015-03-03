@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <title>KnockoutJS primer</title>
+
+    <meta name="description" content="Što je KnockoutJS, čemu služi i zašto ga koristiti" />
+    <meta name="author" content="Neven Falica" />
+
+    <link href="css/bootstrap-3.3.2.css" rel="stylesheet" />
+    <link href="css/impress.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="impress-not-supported">
+  <div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+
+  <div id="impress">
+    <div id="intro" class="step slide" data-x="-1000" data-y="-1000" data-rotate="90" data-scale="2" data-perspective="2">
+      <h1>KnockoutJS</h1>
+      <h3>primer</h3>
+    </div>
+
+    <div id="me" class="step slide" data-x="0" data-y="0" data-scale="1" data-perspective="1">
+      <h2>Neven Falica</h2>
+      <h3>@elkarrde</h3>
+      <br>
+      <h3>Mentat Labs d.o.o.</h3>
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="1000" data-rotate="90">
+        <h1>Što je KnockoutJS?</h1>
+        <ul>
+          <li>
+            front-end library
+          </li>
+          <li>
+            <strong>Model</strong>&ndash;<strong>View</strong>&ndash;<strong>View-Model</strong>
+            koncept
+          </li>
+          <li>
+            dependancy tracking
+          </li>
+          <li>
+            templating
+          </li>
+        </ul>
+        <br>
+        <p>
+          &rarr; Vanilla JS&trade; ;)
+        </p>
+    </div>
+
+    <div id="ex01" class="step slide demo" data-x="3000" data-y="1000" data-rotate="90">
+      <h2>Model</h2>
+      <pre>var userViewModel = {
+  firstName: 'Bob',
+  lastName:  'Dabolina'
+}</pre>
+
+      <h2>View</h2>
+      <pre>Hello &lt;span data-bind="text: firstName"&gt;&lt;/span&gt;.</pre>
+
+      <h2>JS</h2>
+      <pre>ko.applyBindings(userViewModel);</pre>
+
+      <h2>HTML</h2>
+      Hello <span data-bind="text: firstName"></span>.
+    </div>
+  </div>
+
+  <script src="js/impress.js"></script>
+  <script src="js/knockout-3.3.0.js"></script>
+  <script src="js/jquery-2.1.1.js"></script>
+
+  <script>
+    impress().init();
+
+    var ex1 = {
+      firstName: 'Bob',
+      lastName: 'Dabolina'
+    }
+
+    $(function(){
+      ko.applyBindings(ex1, $('#ex1')[0]);
+    });
+  </script>
+
+</body>
+</html>
+
+
