@@ -87,6 +87,15 @@ em {
 code {
   text-shadow: none;
 }
+a {
+  text-shadow: none;
+}
+a:link {
+  color: gold;
+}
+a:visited {
+  color: orangered;
+}
 .play {
   text-shadow: none;
   color: gold;
