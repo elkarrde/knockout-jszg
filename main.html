@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
-    <title>KnockoutJS primer</title>
+    <title>KnockoutJS, a kaj je to?</title>
 
     <meta name="description" content="Što je KnockoutJS, čemu služi i zašto ga koristiti" />
     <meta name="author" content="Neven Falica" />
 
     <link href="css/bootstrap-3.3.2.css" rel="stylesheet" />
     <link href="css/impress.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='css/font.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body class="impress-not-supported">
@@ -21,30 +21,31 @@
   </div>
 
   <div id="impress">
-    <div id="intro" class="step slide" data-x="-1000" data-y="-1000" data-rotate="90" data-scale="2" data-perspective="2">
+    <div id="intro" class="step slide" data-x="-1000" data-y="-1000" data-rotate="90" data-scale="2" data-perspective="4">
       <h1>KnockoutJS</h1>
-      <h3>primer</h3>
+      <h3>a kaj je to?</h3>
     </div>
 
-    <div id="me" class="step slide" data-x="0" data-y="0" data-scale="1" data-perspective="1">
+    <div id="me" class="step slide" data-x="0" data-y="0" data-scale="1" data-perspective="4">
       <h2>Neven Falica</h2>
       <h3>@elkarrde</h3>
       <br>
       <h3>Mentat Labs d.o.o.</h3>
     </div>
 
-    <div class="step slide" data-x="1000" data-y="1000" data-rotate="90">
+    <div class="step slide" data-x="1000" data-y="1000" data-rotate="45" data-perspective="1">
         <h1>Što je KnockoutJS?</h1>
+        <p>
+          Front-end Model&ndash;View&ndash;View-Model library
+        </p>
+        <br />
+        <h2>Osnovni fičri</h2>
         <ul>
           <li>
-            front-end library
+            observables, dependancy tracking
           </li>
           <li>
-            <strong>Model</strong>&ndash;<strong>View</strong>&ndash;<strong>View-Model</strong>
-            koncept
-          </li>
-          <li>
-            dependancy tracking
+            declarative bindings
           </li>
           <li>
             templating
@@ -56,40 +57,316 @@
         </p>
     </div>
 
-    <div id="ex01" class="step slide demo" data-x="3000" data-y="1000" data-rotate="90">
+    <div class="step slide" data-x="1000" data-y="2000" data-rotate="90" data-perspective="0">
+      <h1>Model&ndash;View&ndash;View-Model?</h1>
+
+      <h3>Model</h3>
+      <p>Podaci, objekti business domene</p>
+
+      <h3>View</h3>
+      <p>user-interface, HTML</p>
+
+      <h3>View-Model</h3>
+      <p>transformativni model</p>
+    </div>
+
+    <div id="observable" class="step slide" data-x="1000" data-y="3000" data-rotate="135" data-perspective="0">
+      <h1>Observables?</h1>
+
+      <p>
+        &ldquo;Observed&rdquo; a.k.k praćene varijable
+      </p>
+
+      <h2>Primjer</h2>
+      <button class="btn btn-lg btn-warning" type="button" data-bind="click: setState()">Clicky!</button>
+      <h1 data-bind="visible: state() === false">Huzzah!</h1>
+
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="4000" data-rotate="180" data-perspective="0">
+      <h1>Bindings?</h1>
+
+      <p>Linkanje modela s viewom <code>data-bind</code> atributom</p>
+
+      <pre>&lt;element <strong>data-bind="<em>binding</em>"</strong>/&gt;</pre>
+    </div>
+
+    <div class="step slide break" data-x="3000" data-y="3000" data-rotate="0" data-perspective="1">
+      <h1>Primjeri!</h1>
+    </div>
+
+    <div id="example01" class="step slide demo" data-x="3000" data-y="4000">
+      <h1>Primjer 1</h1>
+
       <h2>Model</h2>
-      <pre>var userViewModel = {
-  firstName: 'Bob',
-  lastName:  'Dabolina'
+      <pre>var example01 = {
+  firstName: '<span data-bind="text: firstName"></span>',
+  lastName:  '<span data-bind="text: lastName"></span>'
+}</pre>
+
+      <h2>View</h2>
+      <pre>Hello &lt;span <strong>data-bind="text: firstName"</strong>&gt;&lt;/span&gt;.</pre>
+
+      <h2>JS</h2>
+      <pre>ko.applyBindings(example01);</pre>
+
+      <h2>HTML</h2>
+      Hello <span data-bind="text: firstName"></span>.
+    </div>
+
+    <div id="example02" class="step slide demo" data-x="3000" data-y="5000">
+      <h1>Primjer 2</h1>
+
+      <h2>Model</h2>
+      <pre>var example02 = {
+  firstName: ko.observable('<span data-bind="text: firstName"></span>'),
+  lastName:  ko.observable('<span data-bind="text: lastName"></span>')
 }</pre>
 
       <h2>View</h2>
       <pre>Hello &lt;span data-bind="text: firstName"&gt;&lt;/span&gt;.</pre>
 
       <h2>JS</h2>
-      <pre>ko.applyBindings(userViewModel);</pre>
+      <pre>ko.applyBindings(example02);</pre>
 
-      <h2>HTML</h2>
+      <h2>HTML <span class="pull-right"><span class="play js-play-example02 glyphicon glyphicon-play"></span></span></h2>
       Hello <span data-bind="text: firstName"></span>.
     </div>
+
+    <div class="step slide demo" data-x="3000" data-y="6000">
+      <h2><strong>Primjer 3&hellip;</strong></h2>
+
+      <h2>Model</h2>
+      <pre>var example03 = {
+  crew: ko.observableArray([]),
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;tbody <strong>data-bind="visible: crew.length &lt; 1"</strong>&gt;
+  &lt;tr&gt;&lt;td colspan="2"&gt;&lt;em&gt;No crew.&lt;/em&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody <strong>data-bind="foreach: crew, visible: crew.length &gt; 0"</strong>&gt;
+  &lt;tr&gt;
+    &lt;td <strong>data-bind="text: firstName"</strong>&gt;&lt;/td&gt;
+    &lt;td <strong>data-bind="text: lastName"</strong>&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;</pre>
+    </div>
+
+    <div class="step slide demo" data-x="3000" data-y="7000">
+      <h1>&hellip;Primjer 3&hellip;</h1>
+      <h2>JS</h2>
+      <pre>ko.applyBindings(example03);</pre>
+
+      <h2>JSON</h2>
+      <pre>[{
+    "firstName": "David",
+    "lastName":  "Bowman"
+  },
+  {
+    "firstName": "Frank",
+    "lastName":  "Poole"
+}]</pre>
+    </div>
+
+    <div id="example03" class="step slide demo" data-x="3000" data-y="8000">
+      <h1>&hellip;Primjer 3</h1>
+
+      <h2>HTML <span class="pull-right"><span class="play js-play-example03 glyphicon glyphicon-play"></span></span></h2>
+      <div class="well well-mini">
+        <p>
+          Members: <span data-bind="text: crew().length"></span>
+        </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First name</th>
+              <th>Last name</th>
+            </tr>
+          </thead>
+          <tbody data-bind="visible: crew().length < 1">
+            <tr>
+              <td colspan="2"><em>No crew.</em></td>
+            </tr>
+          </tbody>
+          <tbody data-bind="foreach: crew" data-nox=", visible: crew().length > 0">
+            <tr>
+              <td data-bind="text: firstName"></td>
+              <td data-bind="text: lastName"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="play js-play-example03-add glyphicon glyphicon-plus"></span>
+      <span class="play js-play-example03-del glyphicon glyphicon-trash"></span>
+    </div>
+
+    <div id="example04" class="step slide demo" data-x="3000" data-y="9000">
+      <h1>Primjer 4</h1>
+
+      <h2>Model</h2>
+      <pre>var example04 = {
+  firstName: ko.observable('<span data-bind="text: firstName"></span>'),
+  lastName:  ko.observable('<span data-bind="text: lastName"></span>'),
+  fullName:  function(){return this.firstName + ' ' + this.lastName})
+}</pre>
+
+      <h2>View</h2>
+      <pre>Hello &lt;span data-bind="text: fullName"&gt;&lt;/span&gt;.</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="First name" data-bind="textInput: firstName, valueUpdate: 'afterkeydown'">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Last name" data-bind="textInput: lastName, valueUpdate: 'afterkeydown'">
+        </div>
+      </form>
+      Your name is: &ldquo;<strong data-bind="text: fullName()"></strong>&rdquo;.
+    </div>
+
+    <div id="bindings1" class="step slide" data-x="4000" data-y="4000" data-rotate="90">
+      <h1>Bindings</h1>
+
+      <ul>
+        <li><strong>visible</strong> &rarr; visibility elementa</li>
+        <li><strong>text</strong> &rarr; sadržaj elementa</li>
+        <li><strong>html</strong> &rarr; sadržaj elementa</li>
+        <li><strong>css</strong> &rarr; CSS klasa elementa</li>
+        <li><strong>style</strong> &rarr; inline-CSS elementa</li>
+        <li><strong>attr</strong> &rarr; atribut elementa</li>
+      </ul>
+    </div>
+
+    <div id="example05" class="step slide code" data-x="5000" data-y="4000">
+      <h1>Visibility</h1>
+
+      <h2>Model</h2>
+      <pre>var example05 = {
+  query: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;span data-bind="<strong>visible: query().length < 1</strong>"&gt;Empty!&lt;/span&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: query, valueUpdate: 'afterkeydown'" />
+          <span data-bind="visible: query().length < 1">Empty!</span>
+        </div>
+      </form>
+    </div>
+
+    <div id="example06" class="step slide code" data-x="5000" data-y="5000">
+      <h1>Text</h1>
+
+      <h2>Model</h2>
+      <pre>var example06 = {
+  entry: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;span data-bind="<strong>text: entry</strong>"&gt;&lt;/span&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: entry, valueUpdate: 'afterkeydown'" />
+          <span data-bind="text: entry"></span>
+        </div>
+      </form>
+    </div>
+
+    <div id="example07" class="step slide code" data-x="5000" data-y="6000">
+      <h1>HTML</h1>
+
+      <h2>Model</h2>
+      <pre>var example07 = {
+  entry: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;span data-bind="<strong>html: entry</strong>"&gt;&lt;/span&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: entry, valueUpdate: 'afterkeydown'" />
+          <span data-bind="html: entry"></span>
+        </div>
+      </form>
+    </div>
+
+    <div id="example08" class="step slide code" data-x="5000" data-y="7000">
+      <h1>CSS</h1>
+
+      <h2>Model</h2>
+      <pre>var example08 = {
+  entry: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;span data-bind="<strong>css: {'glyphicon-ok': entry().length > 2, 'glyphicon-remove': entry().length < 3}</strong>"&gt;&lt;/span&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: entry, valueUpdate: 'afterkeydown'" />
+          <span class="glyphicon" data-bind="css: {'glyphicon-ok': entry().length > 2, 'glyphicon-remove': entry().length < 3}"></span>
+        </div>
+      </form>
+    </div>
+
+    <div id="example09" class="step slide code" data-x="5000" data-y="8000">
+      <h1>Style</h1>
+
+      <h2>Model</h2>
+      <pre>var example09 = {
+  entry: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;span data-bind="<strong>style: {color: entry()}</strong>"&gt;&lt;/span&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: entry, valueUpdate: 'afterkeydown'" />
+          <span data-bind="style: {color: entry()}">Color!</span>
+        </div>
+      </form>
+    </div>
+
+    <div id="example10" class="step slide code" data-x="5000" data-y="9000">
+      <h1>Attr</h1>
+
+      <h2>Model</h2>
+      <pre>var example10 = {
+  entry: ko.observable('')
+}</pre>
+
+      <h2>View</h2>
+      <pre>&lt;button data-bind="<strong>attr: {disabled: entry() === 'off'}</strong>"&gt;Do it&lt;/button&gt;"</pre>
+
+      <h2>HTML</h2>
+      <form class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" data-bind="value: entry, valueUpdate: 'afterkeydown'" />
+          <button type="button" class="btn btn-lg btn-success" data-bind="attr: {disabled: entry() === 'off'}">Do it</button>
+        </div>
+      </form>
+    </div>
+
+
+
   </div>
 
   <script src="js/impress.js"></script>
   <script src="js/knockout-3.3.0.js"></script>
   <script src="js/jquery-2.1.1.js"></script>
-
-  <script>
-    impress().init();
-
-    var ex1 = {
-      firstName: 'Bob',
-      lastName: 'Dabolina'
-    }
-
-    $(function(){
-      ko.applyBindings(ex1, $('#ex1')[0]);
-    });
-  </script>
+  <script src="js/primer.js"></script>
 
 </body>
 </html>
